@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+      <h1 class="mt-5">List of recipes</h1>
+      <div class="alert alert-info" role="alert">
+      
+	<ul>
+	{% for user in users %}
+          <li>{{user.id}}. {{user.title}} - <a href="{{ user.link }}">Voir la recette </a>
+          <p> tags : 
+          {% for field in user.fields %}
+               {{field}} -
+          {% endfor %}
+          </p>
+          <a href="{{ user.adresse }}"><img src={{ user.adresse }} /></a><hr /></li>
+    {% endfor %}
+
+    	{% if req1 is defined %}
+        <h1> {{req1[0]['name']}} </h1>
+        <ul id="USERS">
+        {% for key,val in req1[0].items() %}
+          <li> {{ key }} : {{ val }} </li>
+        {% endfor %}
+      {% endif %}
+      </ul>
+
+	<h1>Add a recipe</h1>
+	 <form method="post" class="form-example">
+	  Title of the recipe :
+	  <input type="text" name="name"><br>
+	  Id of the recipe (please put a non existing number) :
+	  <input type="int" name="id"><br>
+	  Web address of the recipe :
+	  <input type="text" name="link">
+	  <br>
+	  Tag:<br>
+	  <input type="checkbox" name="fields" value="appetizer" checked>  <label for= "appetizer"> Appetizer </label><br>
+  	  <input type="checkbox" name="fields" value="main dish"> <label for="main dish"> Main dish </label> <br>
+	  <input type="checkbox" name="fields" value="dessert"> <label for="dessert"> Dessert </label><br>
+	  <input type="checkbox" name="fields" value="vegan"><label for="vegan"> Vegan</label><br>
+	  <input type="checkbox" name="fields" value="easy"><label for="easy"> Easy</label><br>
+	  <input type="checkbox" name="fields" value="hard"><label for="hard"> Hard </label><br>
+	   Image address (.jpg):
+	  <input type="text" name="adresse"><br>
+	  
+	  <input type="submit" value="Submit">
+	 </form> 
+
+      </div>
+{% endblock %}
